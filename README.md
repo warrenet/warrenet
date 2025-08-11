@@ -49,23 +49,7 @@ Luxury travel seeker, system optimizer, and creative strategist with a love for 
 
 <hr style="border: 1px solid #ccc; margin: 20px 0;">
 
-## Activity & Stats
 
-<div align="center">
-
-<!-- Overall GitHub Stats -->
-<img
-  src="https://github-readme-stats.vercel.app/api?username=warrennet&show_icons=false&include_all_commits=true&count_private=true&hide_rank=true&hide_title=false&hide=issues,contribs&custom_title=GitHub%20Overview&theme=default"
-  alt="GitHub overview stats for Warren Edward Trepp"
-  width="48%" />
-
-<!-- Top Languages (by repo) -->
-<img
-  src="https://github-readme-stats.vercel.app/api/top-langs/?username=warrennet&layout=compact&langs_count=8&card_width=420&custom_title=Top%20Languages&theme=default"
-  alt="Top languages for Warren Edward Trepp"
-  width="48%" />
-
-</div>
 
 <!-- Optional streak card -->
 <!--
