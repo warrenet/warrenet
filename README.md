@@ -1,12 +1,4 @@
-# Hi, I'm Warrenet 👋
-
-![Profile Views](https://komarev.com/ghpvc/?username=warrenet&color=blue)
-![GitHub Followers](https://img.shields.io/github/followers/warrenet?label=Followers&style=social)
-![Languages](https://img.shields.io/github/languages/top/warrenet/warrenet?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/warrenet/warrenet)
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=warrenet&show_icons=true&hide_title=true)
-
----
+# Hi, 
 
 ## 🚀 About Me
 
