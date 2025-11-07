@@ -1,48 +1,43 @@
-# Hi, 
+# Hi, I'm Warrenet 👋
 
 ## 🚀 About Me
 
-I'm Warrenet, a passionate developer and lifelong learner.  
-I love building impactful projects, collaborating with the community, and exploring new technologies.
+I'm a passionate developer and lifelong learner dedicated to building impactful projects and collaborating with the community.  
+I love exploring new technologies and contributing to open source.
 
 - 🔭 Currently working on: Making GitHub awesome!
 - 🌱 Learning: AI, cloud computing, and web innovation
-- 💬 Ask me about: Open source, automation, developer experience
-- 📫 How to reach me: [Your Email/Website/LinkedIn]
+- 💬 Ask me about: Open source, automation, and developer experience
+- 📫 How to reach me: Check the links below!
 
 ---
 
-## 🛠️ Skills & Tools
+## 🛠️ Skills & Technologies
 
-- Languages: Python, JavaScript, TypeScript, Go, Rust, C#
-- Frameworks: React, Node.js, Django, Flask, Next.js
-- Cloud: AWS, Azure, GCP
-- DevOps: Docker, Kubernetes, GitHub Actions
-- Other: GraphQL, REST, CI/CD, Machine Learning
+**Languages**  
+Python • JavaScript • TypeScript • Go • Rust • C#
+
+**Frameworks & Libraries**  
+React • Node.js • Django • Flask • Next.js
+
+**Cloud & DevOps**  
+AWS • Azure • GCP • Docker • Kubernetes • GitHub Actions
+
+**Other Technologies**  
+GraphQL • REST APIs • CI/CD • Machine Learning
 
 ---
 
 ## 📈 GitHub Stats
 
-![Warrenet's GitHub Stats](https://github-readme-stats.vercel.app/api?username=warrenet&show_icons=true&theme=default)
-
----
-
-## 🌟 Featured Projects
-
-- [Awesome Project 1](https://github.com/warrenet/project1)  
-  _Description of your cool project._
-
-- [Awesome Project 2](https://github.com/warrenet/project2)  
-  _Another impactful project you made._
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=warrenet&show_icons=true&theme=radical&hide_border=true&count_private=true)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=warrenet&layout=compact&theme=radical&hide_border=true)
 
 ---
 
 ## 🔗 Connect with Me
 
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?logo=linkedin&logoColor=white&style=for-the-badge)](https://linkedin.com/in/warrenet)
-[![Twitter](https://img.shields.io/badge/-Twitter-blue?logo=twitter&logoColor=white&style=for-the-badge)](https://twitter.com/warrenet)
-[![Website](https://img.shields.io/badge/-Website-black?logo=githubpages&logoColor=white&style=for-the-badge)](https://yourwebsite.com)
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white&style=for-the-badge)](https://github.com/warrenet)
 
 ---
 
