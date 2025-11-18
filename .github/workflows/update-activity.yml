@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Update README with recent activity
         uses: jamesgeorge007/github-activity-readme@master
@@ -18,3 +21,16 @@ jobs:
         with:
           COMMIT_MSG: 'Update recent GitHub activity'
           MAX_LINES: 5
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add README.md
+          git commit -m "Update recent GitHub activity" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push
