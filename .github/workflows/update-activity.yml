@@ -1,5 +1,8 @@
 name: Update GitHub Activity
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 */6 * * *' # Runs every 6 hours
@@ -9,7 +12,12 @@ jobs:
   update-activity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Update README with recent activity
         uses: jamesgeorge007/github-activity-readme@master
