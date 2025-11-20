@@ -10,7 +10,7 @@ jobs:
     name: Update WakaTime Readme
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       
       - name: Update README with WakaTime stats
         uses: athul/waka-readme@master
