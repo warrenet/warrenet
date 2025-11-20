@@ -1,0 +1,163 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # Frontend job - runs if package.json exists
+  frontend:
+    runs-on: ubuntu-latest
+    if: hashFiles('package.json') != ''
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint --if-present
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Run tests
+        run: npm test --if-present
+
+      - name: Upload build artifacts
+        if: matrix.node-version == 20 && success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+          if-no-files-found: ignore
+
+  # Backend job - runs if requirements.txt or pyproject.toml exists
+  backend:
+    runs-on: ubuntu-latest
+    if: hashFiles('requirements.txt') != '' || hashFiles('pyproject.toml') != ''
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f pyproject.toml ]; then pip install .; fi
+
+      - name: Run ruff linter
+        if: hashFiles('.ruff.toml') != '' || hashFiles('pyproject.toml') != ''
+        run: |
+          pip install ruff
+          ruff check .
+        continue-on-error: true
+
+      - name: Run mypy type checker
+        if: hashFiles('mypy.ini') != '' || hashFiles('pyproject.toml') != ''
+        run: |
+          pip install mypy
+          mypy .
+        continue-on-error: true
+
+      - name: Run pytest
+        run: |
+          pip install pytest pytest-cov
+          pytest --cov --cov-report=xml
+        continue-on-error: true
+
+  # Docker build and push for backend services
+  docker:
+    runs-on: ubuntu-latest
+    if: hashFiles('Dockerfile') != '' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  # Fallback job - runs if no specific project metadata files exist
+  fallback:
+    runs-on: ubuntu-latest
+    if: hashFiles('package.json') == '' && hashFiles('requirements.txt') == '' && hashFiles('pyproject.toml') == ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print repository info
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Event: ${{ github.event_name }}"
+          echo ""
+          echo "Repository structure:"
+          ls -la
+
+      - name: Check for shell scripts
+        id: check_scripts
+        run: |
+          if find . -name "*.sh" -type f ! -path "./.git/*" | grep -q .; then
+            echo "has_scripts=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_scripts=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install shellcheck
+        if: steps.check_scripts.outputs.has_scripts == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Run shellcheck
+        if: steps.check_scripts.outputs.has_scripts == 'true'
+        run: |
+          find . -name "*.sh" -type f ! -path "./.git/*" -exec shellcheck {} +
+        continue-on-error: true
+
+      - name: Repository summary
+        run: |
+          echo "✅ CI check completed for profile/documentation repository"
+          echo "No build or test steps required"
