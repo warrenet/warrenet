@@ -1,0 +1,12 @@
+# CODEOWNERS file
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, @warrenet will be requested for
+# review when someone opens a pull request.
+
+* @warrenet
+
+# GitHub Actions workflows
+/.github/workflows/ @warrenet
+
+# GitHub configuration
+/.github/ @warrenet
