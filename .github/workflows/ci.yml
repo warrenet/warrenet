@@ -1,0 +1,171 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # Frontend (Node.js) job - runs only if package.json exists
+  frontend:
+    runs-on: ubuntu-latest
+    if: hashFiles('package.json') != ''
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint --if-present
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Run tests
+        run: npm test --if-present
+
+      - name: Upload build artifacts
+        if: matrix.node-version == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+          if-no-files-found: ignore
+
+  # Backend (Python) job - runs only if Python project files exist
+  backend:
+    runs-on: ubuntu-latest
+    if: hashFiles('requirements.txt') != '' || hashFiles('pyproject.toml') != ''
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies from requirements.txt
+        if: hashFiles('requirements.txt') != ''
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install dependencies from pyproject.toml
+        if: hashFiles('pyproject.toml') != ''
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Run ruff linter
+        if: hashFiles('ruff.toml') != '' || hashFiles('.ruff.toml') != '' || hashFiles('pyproject.toml') != ''
+        run: |
+          pip install ruff
+          ruff check .
+        continue-on-error: true
+
+      - name: Run mypy type checker
+        if: hashFiles('mypy.ini') != '' || hashFiles('.mypy.ini') != '' || hashFiles('pyproject.toml') != ''
+        run: |
+          pip install mypy
+          mypy .
+        continue-on-error: true
+
+      - name: Run pytest
+        run: |
+          pip install pytest
+          pytest
+        continue-on-error: true
+
+  # Docker build and push - runs only if Dockerfile exists
+  docker:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && hashFiles('Dockerfile') != ''
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Fallback skeleton job - runs when no specific project metadata is found
+  repository-check:
+    runs-on: ubuntu-latest
+    if: hashFiles('package.json') == '' && hashFiles('requirements.txt') == '' && hashFiles('pyproject.toml') == ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print repository metadata
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo ""
+          echo "Repository structure:"
+          ls -la
+          echo ""
+          echo "File count:"
+          find . -type f | wc -l
+
+      - name: Check for shell scripts
+        id: check-scripts
+        run: |
+          SCRIPT_COUNT=$(find . -name "*.sh" -type f | wc -l)
+          echo "Found $SCRIPT_COUNT shell scripts"
+          echo "script_count=$SCRIPT_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Install shellcheck
+        if: steps.check-scripts.outputs.script_count > 0
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Run shellcheck on shell scripts
+        if: steps.check-scripts.outputs.script_count > 0
+        run: |
+          find . -name "*.sh" -type f -exec shellcheck {} +
+        continue-on-error: true

@@ -1,0 +1,5 @@
+# Code owners for this repository
+# These owners will be the default owners for everything in the repo
+# and will be requested for review when someone opens a pull request.
+
+* @warrenet

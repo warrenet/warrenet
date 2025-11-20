@@ -1,0 +1,83 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect static site framework
+        id: detect
+        run: |
+          if [ -f "package.json" ]; then
+            if grep -q '"next"' package.json; then
+              echo "framework=nextjs" >> $GITHUB_OUTPUT
+            elif grep -q '"gatsby"' package.json; then
+              echo "framework=gatsby" >> $GITHUB_OUTPUT
+            elif grep -q '"vite"' package.json; then
+              echo "framework=vite" >> $GITHUB_OUTPUT
+            else
+              echo "framework=npm" >> $GITHUB_OUTPUT
+            fi
+          elif [ -f "index.html" ] || [ -d "public" ]; then
+            echo "framework=static" >> $GITHUB_OUTPUT
+          else
+            echo "framework=none" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        if: steps.detect.outputs.framework != 'static' && steps.detect.outputs.framework != 'none'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.detect.outputs.framework != 'static' && steps.detect.outputs.framework != 'none'
+        run: npm ci
+
+      - name: Build site
+        if: steps.detect.outputs.framework != 'static' && steps.detect.outputs.framework != 'none'
+        run: npm run build --if-present
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: |
+            ./public
+            ./dist
+            ./build
+            ./_site
+            ./out
+            ./index.html
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
