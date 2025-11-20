@@ -1,0 +1,11 @@
+# Code ownership for the warrenet/warrenet repository
+# These owners will be automatically requested for review when someone opens a pull request
+
+# Global ownership - all files
+* @warrenet
+
+# GitHub configuration files
+/.github/ @warrenet
+
+# Workflows
+/.github/workflows/ @warrenet
