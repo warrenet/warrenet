@@ -31,15 +31,12 @@ jobs:
         run: npm ci
 
       - name: Run linter
-        if: hashFiles('package.json') != ''
         run: npm run lint --if-present
 
       - name: Build
-        if: hashFiles('package.json') != ''
         run: npm run build --if-present
 
       - name: Run tests
-        if: hashFiles('package.json') != ''
         run: npm test --if-present
 
       - name: Upload build artifacts
@@ -60,7 +57,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
