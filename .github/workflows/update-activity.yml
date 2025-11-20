@@ -1,4 +1,6 @@
 name: Update GitHub Activity
+permissions:
+  contents: write
 
 on:
   schedule:
@@ -13,6 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Update README with recent activity
         uses: jamesgeorge007/github-activity-readme@master
