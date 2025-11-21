@@ -119,9 +119,9 @@ Why do programmers prefer dark mode? Because light attracts bugs!
 ## 📊 Recent GitHub Activity (Live Info #3)
 
 <!--START_SECTION:activity-->
-1. 🗣 Commented on [#54](https://github.com/warrenet/Jules-ai-code-related-/pull/54#issuecomment-3558794571) in [warrenet/Jules-ai-code-related-](https://github.com/warrenet/Jules-ai-code-related-)
-2. 🗣 Commented on [#54](https://github.com/warrenet/Jules-ai-code-related-/pull/54#issuecomment-3558792501) in [warrenet/Jules-ai-code-related-](https://github.com/warrenet/Jules-ai-code-related-)
-3. 🗣 Commented on [#54](https://github.com/warrenet/Jules-ai-code-related-/pull/54#issuecomment-3558791952) in [warrenet/Jules-ai-code-related-](https://github.com/warrenet/Jules-ai-code-related-)
+1. ❗ Opened issue [#3](https://github.com/mattnigh/copilot_issue_templates/issues/3) in [mattnigh/copilot_issue_templates](https://github.com/mattnigh/copilot_issue_templates)
+2. 🗣 Commented on [#54](https://github.com/warrenet/Jules-ai-code-related-/pull/54#issuecomment-3558794571) in [warrenet/Jules-ai-code-related-](https://github.com/warrenet/Jules-ai-code-related-)
+3. 🗣 Commented on [#54](https://github.com/warrenet/Jules-ai-code-related-/pull/54#issuecomment-3558792501) in [warrenet/Jules-ai-code-related-](https://github.com/warrenet/Jules-ai-code-related-)
 <!--END_SECTION:activity-->
 
 ---
