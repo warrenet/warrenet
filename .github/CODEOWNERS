@@ -1,11 +1,28 @@
 # Code ownership for the warrenet/warrenet repository
 # These owners will be automatically requested for review when someone opens a pull request
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Global ownership - all files
 * @warrenet
 
 # GitHub configuration files
 /.github/ @warrenet
+/.github/CODEOWNERS @warrenet
+/.github/dependabot.yml @warrenet
 
-# Workflows
+# Workflows - critical automation
 /.github/workflows/ @warrenet
+
+# Issue and PR templates
+/.github/ISSUE_TEMPLATE/ @warrenet
+/.github/PULL_REQUEST_TEMPLATE.md @warrenet
+
+# Community health files
+/CODE_OF_CONDUCT.md @warrenet
+/CONTRIBUTING.md @warrenet
+/SECURITY.md @warrenet
+/LICENSE @warrenet
+
+# Profile README - the main showcase
+/README.md @warrenet
+

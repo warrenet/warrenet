@@ -1,0 +1,37 @@
+# Labeler configuration for pull requests
+# Add labels to pull requests based on changed files
+
+# Documentation
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: ['**/*.md', 'docs/**/*']
+
+# GitHub Actions and Workflows
+github-actions:
+  - changed-files:
+    - any-glob-to-any-file: ['.github/workflows/**/*.yml', '.github/workflows/**/*.yaml']
+
+# GitHub Configuration
+github-config:
+  - changed-files:
+    - any-glob-to-any-file: ['.github/**/*', '!.github/workflows/**/*']
+
+# Dependencies
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file: ['**/package*.json', '**/yarn.lock', '**/requirements*.txt', '**/Cargo.toml', '**/go.mod', '**/go.sum', '.github/dependabot.yml']
+
+# README (the main profile file)
+profile-readme:
+  - changed-files:
+    - any-glob-to-any-file: ['README.md']
+
+# Security
+security:
+  - changed-files:
+    - any-glob-to-any-file: ['SECURITY.md', '.github/workflows/codeql*.yml']
+
+# Community Health Files
+community:
+  - changed-files:
+    - any-glob-to-any-file: ['CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'LICENSE', '.github/CODEOWNERS', '.github/FUNDING.yml']

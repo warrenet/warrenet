@@ -1,11 +1,22 @@
 # Hi, I'm Warrenet 👋
 
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2D9EF7&center=true&vCenter=true&width=1000&lines=Full+Stack+Developer+%F0%9F%9A%80;Open+Source+Enthusiast+%E2%9C%A8;Lifelong+Learner+%F0%9F%93%9A;Building+Awesome+Projects+%F0%9F%92%BB)](https://git.io/typing-svg)
+
+<div align="center">
+
 <!-- Profile Views Counter (Live Info #1) -->
 ![Profile Views](https://komarev.com/ghpvc/?username=warrenet&color=blue&style=for-the-badge&label=PROFILE+VIEWS)
 
 <!-- GitHub Followers/Following Badges (Live Info #2) -->
 ![Followers](https://img.shields.io/github/followers/warrenet?style=for-the-badge&logo=github&label=Followers)
 ![Following](https://img.shields.io/github/stars/warrenet?style=for-the-badge&logo=github&label=Total+Stars)
+
+<!-- Repository Health Badges -->
+[![CI](https://img.shields.io/github/actions/workflow/status/warrenet/warrenet/ci.yml?style=for-the-badge&logo=github-actions&label=CI)](https://github.com/warrenet/warrenet/actions)
+[![License](https://img.shields.io/github/license/warrenet/warrenet?style=for-the-badge)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/warrenet/warrenet?style=for-the-badge&logo=github)](https://github.com/warrenet/warrenet/commits)
+
+</div>
 
 ## 🚀 About Me
 
@@ -58,6 +69,14 @@ I love exploring new technologies and contributing to open source. With years of
 ![REST APIs](https://img.shields.io/badge/REST_APIs-Expert-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![CI/CD](https://img.shields.io/badge/CI/CD-Expert-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Machine Learning](https://img.shields.io/badge/ML-Intermediate-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+
+### Databases & Tools
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Advanced-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Advanced-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-Advanced-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Expert-F05032?style=for-the-badge&logo=git&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-Advanced-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![VS Code](https://img.shields.io/badge/VS_Code-Expert-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 ---
 
@@ -128,8 +147,35 @@ Why do programmers prefer dark mode? Because light attracts bugs!
 
 ## 📈 GitHub Stats
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=warrenet&show_icons=true&theme=radical&hide_border=true&count_private=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=warrenet&layout=compact&theme=radical&hide_border=true)
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=warrenet&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="GitHub Stats" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=warrenet&layout=compact&theme=radical&hide_border=true&langs_count=8" alt="Top Languages" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=warrenet&theme=react-dark&hide_border=true&area=true" alt="Contribution Graph" />
+</p>
+
+---
+
+## 🏅 GitHub Metrics
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=warrenet&theme=radical" alt="Profile Details" />
+</p>
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=warrenet&theme=radical" alt="Repos per Language" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=warrenet&theme=radical" alt="Most Commit Language" />
+</p>
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=warrenet&theme=radical" alt="Stats" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=warrenet&theme=radical" alt="Productive Time" />
+</p>
 
 ---
 
@@ -149,3 +195,26 @@ Why do programmers prefer dark mode? Because light attracts bugs!
 ---
 
 _Thanks for visiting my profile! ⭐_
+
+<div align="center">
+
+### 📜 Repository Information
+
+[![Contributors](https://img.shields.io/github/contributors/warrenet/warrenet?style=flat-square)](https://github.com/warrenet/warrenet/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/warrenet/warrenet?style=flat-square)](https://github.com/warrenet/warrenet/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/warrenet/warrenet?style=flat-square)](https://github.com/warrenet/warrenet/pulls)
+[![Repo Size](https://img.shields.io/github/repo-size/warrenet/warrenet?style=flat-square)](https://github.com/warrenet/warrenet)
+
+**Made with ❤️ and lots of ☕**
+
+_If you like what you see, consider giving it a ⭐_
+
+![Made with Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg?style=flat-square)
+![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square)
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+
+---
+
+<sub>© 2024 warrenet · This repository is licensed under the [MIT License](LICENSE)</sub>
+
+</div>

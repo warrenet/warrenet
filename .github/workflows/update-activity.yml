@@ -1,11 +1,12 @@
 name: Update GitHub Activity
-permissions:
-  contents: write
 
 on:
   schedule:
     - cron: '0 */6 * * *' # Runs every 6 hours
   workflow_dispatch: # Allows manual triggering
+
+permissions:
+  contents: write
 
 jobs:
   update-activity:
@@ -17,22 +18,9 @@ jobs:
           fetch-depth: 0
 
       - name: Update README with recent activity
-        uses: jamesgeorge007/github-activity-readme@master
+        uses: jamesgeorge007/github-activity-readme@v0.4.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          COMMIT_MSG: 'Update recent GitHub activity'
+          COMMIT_MSG: 'chore: update recent GitHub activity'
           MAX_LINES: 5
-
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit and push changes
-        run: |
-          git add README.md
-          git commit -m "chore: update GitHub activity" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
