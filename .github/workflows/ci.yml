@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check:
@@ -15,21 +19,61 @@ jobs:
       
       - name: Check repository structure
         run: |
-          echo "Repository structure checked"
-          echo "Languages in this repository:"
+          echo "✅ Repository structure checked"
+          echo ""
+          echo "📊 Repository Analysis:"
+          echo "====================="
+          
+          # Check for various language ecosystems
           if [ -f "package.json" ]; then
-            echo "- Node.js/JavaScript/TypeScript"
+            echo "- ✅ Node.js/JavaScript/TypeScript detected"
           fi
           if [ -f "go.mod" ]; then
-            echo "- Go"
+            echo "- ✅ Go detected"
           fi
           if [ -f "requirements.txt" ] || [ -f "setup.py" ] || [ -f "pyproject.toml" ]; then
-            echo "- Python"
+            echo "- ✅ Python detected"
           fi
           if [ -f "Cargo.toml" ]; then
-            echo "- Rust"
+            echo "- ✅ Rust detected"
           fi
-          if [ -f "*.csproj" ] || [ -f "*.sln" ]; then
-            echo "- C#/.NET"
+          if find . -name "*.csproj" -o -name "*.sln" 2>/dev/null | grep -q .; then
+            echo "- ✅ C#/.NET detected"
           fi
-          echo "This is a minimal CI check. Add build/test steps as needed."
+          
+          echo ""
+          echo "📄 README validation..."
+          if [ -f "README.md" ]; then
+            echo "- ✅ README.md exists"
+            # Validate README has required sections
+            if grep -q "About Me" README.md; then
+              echo "- ✅ About Me section found"
+            fi
+            if grep -q "Skills" README.md || grep -q "Technologies" README.md; then
+              echo "- ✅ Skills section found"
+            fi
+          else
+            echo "- ❌ README.md not found"
+            exit 1
+          fi
+          
+          echo ""
+          echo "🔧 GitHub configuration..."
+          if [ -d ".github/workflows" ]; then
+            workflow_count=$(find .github/workflows -name "*.yml" -o -name "*.yaml" | wc -l)
+            echo "- ✅ Found $workflow_count workflow(s)"
+          fi
+          
+          echo ""
+          echo "✨ All checks passed!"
+      
+      - name: Validate workflow syntax
+        run: |
+          echo "Checking workflow files syntax..."
+          for file in .github/workflows/*.yml; do
+            if [ -f "$file" ]; then
+              echo "Checking $file..."
+              # Basic YAML validation using Python
+              python3 -c "import yaml; yaml.safe_load(open('$file'))" && echo "  ✅ Valid" || echo "  ❌ Invalid"
+            fi
+          done

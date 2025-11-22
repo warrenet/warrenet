@@ -5,27 +5,35 @@ on:
     - cron: '0 8 * * *' # Runs every day at 8 AM UTC
   workflow_dispatch: # Allows manual triggering
 
+permissions:
+  contents: write
+
 jobs:
   update-joke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Get joke from API
         id: joke_api
-        uses: a-h/http-request-action@v1
-        with:
-          url: 'https://v2.jokeapi.dev/joke/Programming?type=single'
-          method: 'GET'
+        run: |
+          joke_response=$(curl -s 'https://v2.jokeapi.dev/joke/Programming?type=single')
+          echo "response=$joke_response" >> $GITHUB_OUTPUT
 
       - name: Extract joke text
         id: joke_text
-        run: echo "::set-output name=text::$(echo '${{ steps.joke_api.outputs.response }}' | jq -r .joke)"
+        run: |
+          joke_text=$(echo '${{ steps.joke_api.outputs.response }}' | jq -r .joke)
+          echo "text=$joke_text" >> $GITHUB_OUTPUT
 
       - name: Update README with new joke
-        uses: a-h/update-file-action@v1
-        with:
-          path: README.md
-          start: "<!-- JOKE-OF-THE-DAY:START -->"
-          end: "<!-- JOKE-OF-THE-DAY:END -->"
-          content: ${{ steps.joke_text.outputs.text }}
+        run: |
+          joke="${{ steps.joke_text.outputs.text }}"
+          sed -i '/<!-- JOKE-OF-THE-DAY:START -->/,/<!-- JOKE-OF-THE-DAY:END -->/c\<!-- JOKE-OF-THE-DAY:START -->\n'"$joke"'\n<!-- JOKE-OF-THE-DAY:END -->' README.md
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update daily programming joke" && git push)
