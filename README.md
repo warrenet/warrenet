@@ -1,6 +1,6 @@
 # Hi, I'm Warrenet 👋
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2D9EF7&center=true&vCenter=true&width=1000&lines=Full+Stack+Developer+%F0%9F%9A%80;Open+Source+Enthusiast+%E2%9C%A8;Lifelong+Learner+%F0%9F%93%9A;Building+Awesome+Projects+%F0%9F%92%BB)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2D9EF7&center=true&vCenter=true&width=1000&lines=Full+Stack+Developer+%F0%9F%9A%80;Open+Source+Enthusiast+%E2%9C%A8;Lifelong+Learner+%F0%9F%93%9A;Building+Awesome+Projects+%F0%9F%92%BB)](https://git.io/typing-svg)
 
 <div align="center">
 
