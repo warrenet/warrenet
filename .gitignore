@@ -1,0 +1,103 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.vim/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary Files
+*.log
+*.tmp
+*.temp
+*.bak
+*.cache
+.env
+.env.local
+.env.*.local
+
+# Node.js (if ever used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+
+# Python (if ever used)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+.venv
+
+# Go (if ever used)
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Rust (if ever used)
+target/
+Cargo.lock
+
+# Build artifacts
+*.o
+*.a
+*.obj
+*.bin
+*.out
+
+# Test coverage
+coverage/
+*.coveragerc
+.coverage
+.coverage.*
+htmlcov/
+
+# Documentation build outputs
+site/
+_site/
+docs/_build/
+
+# Secrets and sensitive data (extra safety)
+secrets.yml
+secrets.yaml
+.secrets
+credentials.json
