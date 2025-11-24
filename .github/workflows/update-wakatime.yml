@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v6
       
       - name: Update README with WakaTime stats
-        uses: athul/waka-readme@v0.2.6
+        uses: athul/waka-readme@v0.3.1
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           SHOW_TITLE: true
